@@ -1,6 +1,7 @@
-import { connectDB } from "../lib/db";
-import Card from "../lib/Card";
-import { verifyAuth } from "../lib/auth";
+import { connectDB } from "../lib/db.js";
+import Card from "../lib/Card.js";
+import { verifyAuth } from "../lib/auth.js";
+
 
 export default async function handler(req, res) {
   try {
@@ -18,3 +19,4 @@ export default async function handler(req, res) {
     res.status(401).json({ message: err.message });
   }
 }
+
