@@ -1,10 +1,14 @@
-﻿import { connectDB } from "../../lib/db";
+import { connectDB } from "../../lib/db";
 import Card from "../../lib/Card";
 import { verifyAuth } from "../../lib/auth";
 
 export default async function handler(req, res) {
   try {
-    verifyAuth(req);
+    const auth = verifyAuth(req);
+    if (!auth.ok) {
+      return res.status(401).json({ message: auth.message });
+    }
+
     await connectDB();
 
     if (req.method === "GET") {
@@ -17,8 +21,9 @@ export default async function handler(req, res) {
       return res.status(201).json(card);
     }
 
-    res.status(405).end();
+    return res.status(405).end();
   } catch (err) {
-    res.status(401).json({ message: err.message });
+    console.error("API ERROR:", err);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 }
