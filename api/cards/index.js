@@ -2,6 +2,16 @@ import { connectDB } from "../../lib/db.js";
 import Card from "../../lib/Card.js";
 
 export default async function handler(req, res) {
+  // 🔥 CORS HEADERS (MOST IMPORTANT)
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Preflight request
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   try {
     await connectDB();
 
