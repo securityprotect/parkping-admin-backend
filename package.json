@@ -1,0 +1,8 @@
+﻿{
+  "name": "parkping-backend",
+  "type": "module",
+  "dependencies": {
+    "mongoose": "^8.0.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
