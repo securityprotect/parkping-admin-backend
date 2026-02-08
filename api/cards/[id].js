@@ -4,9 +4,12 @@ import { verifyAuth } from "../../../lib/auth.js";
 
 export default async function handler(req, res) {
   try {
-    verifyAuth(req);
-    await connectDB();
+    const auth = verifyAuth(req);
+    if (!auth.ok) {
+      return res.status(401).json({ message: auth.message });
+    }
 
+    await connectDB();
     const { id } = req.query;
 
     if (req.method === "PUT") {
@@ -19,9 +22,9 @@ export default async function handler(req, res) {
       return res.json({ message: "Deleted" });
     }
 
-    res.status(405).end();
+    return res.status(405).end();
   } catch (err) {
-    res.status(401).json({ message: err.message });
+    console.error(err);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 }
-
