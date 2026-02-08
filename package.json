@@ -1,17 +1,13 @@
 {
   "name": "parkping-admin-backend",
   "version": "1.0.0",
-  "description": "ParkPing Admin Backend - Vercel Serverless APIs",
-  "type": "module",
   "private": true,
-  "engines": {
-    "node": "18.x"
-  },
+  "type": "module",
   "scripts": {
-    "dev": "vercel dev",
-    "start": "node api/cards/index.js"
+    "dev": "node index.js"
   },
   "dependencies": {
-    "mongoose": "^8.1.0"
+    "mongoose": "^8.0.0",
+    "jsonwebtoken": "^9.0.2"
   }
 }
